@@ -1,5 +1,8 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 import appConfig from '../config.json'
+import React from 'react';
+import { useRouter} from 'next/router'; // useAlgumacoisa é um hook
+import next from 'next';
 
 function Title(props){
     console.log(props);
@@ -23,86 +26,17 @@ function Title(props){
     );
 }
 
-function GlobalStyle(){
-    return(
-        <style global jsx>
-            {`
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                list-style: none;
-              }
-
-            body {
-                font-family: 'Open Sans', sans-serif;
-            }
-
-            html, body, #__next {
-                min-height: 100vh;
-                display: flex;
-                flex: 1;
-            }
-
-            #__next 
-            {
-                flex: 1;
-            }
-            #__next > * 
-            {
-                flex: 1;
-            }
-
-            `}
-        </style>
-    );
-}
-
-// function HomePage()
-// {
-//     return (
-//     <div>
-//         <GlobalStyle>
-
-//         </GlobalStyle>
-//        <Title tag="h2"> Boas vindas de volta </Title> 
-//        <h2> Discord - Alura Matrix </h2>
-
-//        <style jsx>
-//        {`
-//             h1
-//             {
-//                 color: red;
-//                 font-size: 30px;
-//             }
-            
-//             h2
-//             {
-//                 color: purple ;
-//             }
-//         `}
-//        </style>
-//     </div>
-//     )
-// }
-  
-// export default HomePage
-
-// atribuindo uma tag no parametro props <tag></tag>, ele vai buscar na função a tag com aquele nome, se não encontrar deixa sem.
-// deixando como $tag, toda tag vai ter esse valor, independente de chamar h2 ou não.
-// agora,usando a biblioteca
-
 export default function PaginaInicial() {
-    const username = 'anafelizatti';
+  const [username, setUsername] = React.useState('anafelizatti');
+  const roteamento = useRouter();
   
     return (
       <>
-        <GlobalStyle />
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             backgroundColor: appConfig.theme.colors.primary[100],
-            backgroundImage: 'url(https://wallpapercave.com/wp/wp7698391.jpg)',
+            backgroundImage: 'url(https://wallpaper.dog/large/17260441.png)',
             backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
           }}
         >
@@ -118,27 +52,40 @@ export default function PaginaInicial() {
               width: '100%', maxWidth: '700px',
               borderRadius: '30px', padding: '50px', margin: '26px',
               boxShadow: '0 10px 20px 0 rgb(0 0 0 / 40%)',
-              backgroundColor: appConfig.theme.colors.neutrals[400],
+              backgroundColor: appConfig.theme.colors.neutrals[400], opacity:0.9,
+              backgroundImage: 'url(https://media.istockphoto.com/photos/violet-cloud-picture-id999899330?b=1&k=20&m=999899330&s=170667a&w=0&h=LFxYLDgp8snsa0fUeJ87JQ9kTca2TT8w9kW9by0e3fQ=)',
+              
             }}
           >
             {/* Formulário */}
             <Box
               as="form"
+              onSubmit={function (infosDoEvento) {
+                infosDoEvento.preventDefault();
+                console.log('Alguém submeteu o form');
+                roteamento.push('/chat');
+              }}
               styleSheet={{
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                width: { xs: '100%', sm: '60%' }, textAlign: 'center', marginBottom: '10px',
+                width: { xs: '100%', sm: '60%' }, textAlign: 'center', marginBottom: '10px',opacity: 1
               }}
             >
-              <Title tag="h2">Welcome!</Title>
+              <Title tag="h2">Who is there?</Title>
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[800] }}>
                 {appConfig.name}
               </Text>
   
               <TextField
+                value={username}
+                onChange={function (event) {
+                  console.log('usuario digitou', event.target.value);
+                  const valor = event.target.value;
+                  setUsername(valor);
+                }}
                 fullWidth
                 textFieldColors={{
                   neutral: {
-                    textColor: appConfig.theme.colors.primary[800],
+                    textColor: appConfig.theme.colors.primary[900],
                     mainColor: appConfig.theme.colors.neutrals[200],
                     mainColorHighlight: appConfig.theme.colors.primary[900],
                     backgroundColor: appConfig.theme.colors.neutrals[300],
@@ -168,18 +115,18 @@ export default function PaginaInicial() {
                 alignItems: 'center',
                 maxWidth: '200px',
                 padding: '16px',
-                backgroundColor: appConfig.theme.colors.neutrals[800],
-                border: '1px solid',
-                borderColor: appConfig.theme.colors.neutrals[900],
+                backgroundColor: appConfig.theme.colors.primary[800],
                 borderRadius: '10%',
                 flex: 1,
                 minHeight: '240px',
+                opacity:0.9,
               }}
             >
               <Image
                 styleSheet={{
                   borderRadius: '50%',
                   marginBottom: '15px',
+                  opacity: 1
                 }}
                 src={`https://github.com/${username}.png`}
               />
