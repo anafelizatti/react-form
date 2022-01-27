@@ -128,7 +128,7 @@ export default function PaginaInicial() {
                   marginBottom: '15px',
                   opacity: 1
                 }}
-                src={`https://github.com/${username}.png`}
+                src={username.length >= 2 ? `https://github.com/${username}.png` : ""}
               />
               <Text
                 variant="body4"
