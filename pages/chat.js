@@ -164,8 +164,13 @@ function Header() {
                     Chat
                 </Text>
                 <Button
-                    variant='tertiary'
-                    colorVariant='neutral'
+                    buttonColors={{
+                        contrastColor: '#FFFFFF',
+                        mainColor: '#A5AAC0',
+                        mainColorLight: '#A5AAC0',
+                        mainColorStrong: '#040123'
+                    }}
+                    variant='secondary'
                     label='Logout'
                     href="/"
                 />

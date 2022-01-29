@@ -65,7 +65,11 @@ export default function PaginaInicial() {
             }}
           >
             <Title tag="h2">Who is there?</Title>
-            <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[800] }}>
+            <Text variant="body3" 
+              styleSheet={{ 
+                marginBottom: '32px', 
+                color: appConfig.theme.colors.neutrals[800] 
+              }}>
               {appConfig.name}
             </Text>
 
